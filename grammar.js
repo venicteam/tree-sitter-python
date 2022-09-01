@@ -42,14 +42,7 @@ module.exports = grammar({
     [$.match_statement, $.primary_expression],
   ],
 
-  supertypes: $ => [
-    $._simple_statement,
-    $._compound_statement,
-    $.expression,
-    $.primary_expression,
-    $.pattern,
-    $.parameter,
-  ],
+  
 
   externals: $ => [
     $._newline,
@@ -85,9 +78,9 @@ module.exports = grammar({
   word: $ => $.identifier,
 
   rules: {
-    module: $ => repeat($._statement),
+    module: $ => repeat($.statement),
 
-    _statement: $ => choice(
+    statement: $ => choice(
       $._simple_statements,
       $._compound_statement
     ),
@@ -471,7 +464,7 @@ module.exports = grammar({
     ),
 
     block: $ => seq(
-      repeat($._statement),
+      repeat($.statement),
       $._dedent
     ),
 
